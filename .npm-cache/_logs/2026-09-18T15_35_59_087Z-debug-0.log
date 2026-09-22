@@ -1,0 +1,264 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.19.0
+2 info using node@v24.20.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\SAGAR\Desktop\mobile-shop\server\.npmrc
+5 silly config load:file:C:\Users\SAGAR\.npmrc
+6 silly config load:file:C:\Users\SAGAR\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install jsonwebtoken
+8 verbose argv "install" "jsonwebtoken" "--cache" "C:\\Users\\SAGAR\\Desktop\\mobile-shop\\.npm-cache"
+9 verbose logfile logs-max:10 dir:C:\Users\SAGAR\Desktop\mobile-shop\.npm-cache\_logs\2026-09-18T15_35_59_087Z-
+10 verbose logfile C:\Users\SAGAR\Desktop\mobile-shop\.npm-cache\_logs\2026-09-18T15_35_59_087Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:1995702272 maxSize:498925568 maxEntrySize:249462784
+13 silly idealTree buildDeps
+14 silly fetch manifest jsonwebtoken@*
+15 silly packumentCache full:https://registry.npmjs.org/jsonwebtoken cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/jsonwebtoken 376ms (cache miss)
+17 silly packumentCache full:https://registry.npmjs.org/jsonwebtoken set size:undefined disposed:false
+18 silly placeDep ROOT jsonwebtoken@9.0.3 OK for: mobile-shop-server@1.0.0 want: *
+19 silly fetch manifest jws@^4.0.1
+20 silly packumentCache full:https://registry.npmjs.org/jws cache-miss
+21 silly fetch manifest semver@^7.5.4
+22 silly packumentCache full:https://registry.npmjs.org/semver cache-miss
+23 silly fetch manifest lodash.once@^4.0.0
+24 silly packumentCache full:https://registry.npmjs.org/lodash.once cache-miss
+25 silly fetch manifest lodash.includes@^4.3.0
+26 silly packumentCache full:https://registry.npmjs.org/lodash.includes cache-miss
+27 silly fetch manifest lodash.isnumber@^3.0.3
+28 silly packumentCache full:https://registry.npmjs.org/lodash.isnumber cache-miss
+29 silly fetch manifest lodash.isstring@^4.0.1
+30 silly packumentCache full:https://registry.npmjs.org/lodash.isstring cache-miss
+31 silly fetch manifest lodash.isboolean@^3.0.3
+32 silly packumentCache full:https://registry.npmjs.org/lodash.isboolean cache-miss
+33 silly fetch manifest lodash.isinteger@^4.0.4
+34 silly packumentCache full:https://registry.npmjs.org/lodash.isinteger cache-miss
+35 silly fetch manifest lodash.isplainobject@^4.0.6
+36 silly packumentCache full:https://registry.npmjs.org/lodash.isplainobject cache-miss
+37 http fetch GET 200 https://registry.npmjs.org/npm 602ms
+38 http fetch GET 200 https://registry.npmjs.org/jws 127ms (cache miss)
+39 silly packumentCache full:https://registry.npmjs.org/jws set size:undefined disposed:false
+40 http fetch GET 200 https://registry.npmjs.org/lodash.isstring 331ms (cache miss)
+41 silly packumentCache full:https://registry.npmjs.org/lodash.isstring set size:undefined disposed:false
+42 http fetch GET 200 https://registry.npmjs.org/lodash.isboolean 333ms (cache miss)
+43 silly packumentCache full:https://registry.npmjs.org/lodash.isboolean set size:undefined disposed:false
+44 http fetch GET 200 https://registry.npmjs.org/lodash.once 337ms (cache miss)
+45 silly packumentCache full:https://registry.npmjs.org/lodash.once set size:undefined disposed:false
+46 http fetch GET 200 https://registry.npmjs.org/lodash.includes 338ms (cache miss)
+47 silly packumentCache full:https://registry.npmjs.org/lodash.includes set size:undefined disposed:false
+48 http fetch GET 200 https://registry.npmjs.org/lodash.isinteger 376ms (cache miss)
+49 silly packumentCache full:https://registry.npmjs.org/lodash.isinteger set size:undefined disposed:false
+50 http fetch GET 200 https://registry.npmjs.org/lodash.isplainobject 393ms (cache miss)
+51 silly packumentCache full:https://registry.npmjs.org/lodash.isplainobject set size:undefined disposed:false
+52 http fetch GET 200 https://registry.npmjs.org/lodash.isnumber 404ms (cache miss)
+53 silly packumentCache full:https://registry.npmjs.org/lodash.isnumber set size:undefined disposed:false
+54 http fetch GET 200 https://registry.npmjs.org/semver 411ms (cache miss)
+55 silly packumentCache full:https://registry.npmjs.org/semver set size:undefined disposed:false
+56 silly placeDep ROOT jws@4.0.1 OK for: jsonwebtoken@9.0.3 want: ^4.0.1
+57 silly placeDep ROOT lodash.includes@4.3.0 OK for: jsonwebtoken@9.0.3 want: ^4.3.0
+58 silly placeDep ROOT lodash.isboolean@3.0.3 OK for: jsonwebtoken@9.0.3 want: ^3.0.3
+59 silly placeDep ROOT lodash.isinteger@4.0.4 OK for: jsonwebtoken@9.0.3 want: ^4.0.4
+60 silly placeDep ROOT lodash.isnumber@3.0.3 OK for: jsonwebtoken@9.0.3 want: ^3.0.3
+61 silly placeDep ROOT lodash.isplainobject@4.0.6 OK for: jsonwebtoken@9.0.3 want: ^4.0.6
+62 silly placeDep ROOT lodash.isstring@4.0.1 OK for: jsonwebtoken@9.0.3 want: ^4.0.1
+63 silly placeDep ROOT lodash.once@4.1.1 OK for: jsonwebtoken@9.0.3 want: ^4.0.0
+64 silly placeDep ROOT semver@7.8.5 OK for: jsonwebtoken@9.0.3 want: ^7.5.4
+65 silly fetch manifest jwa@^2.0.1
+66 silly packumentCache full:https://registry.npmjs.org/jwa cache-miss
+67 http fetch GET 200 https://registry.npmjs.org/jwa 89ms (cache miss)
+68 silly packumentCache full:https://registry.npmjs.org/jwa set size:undefined disposed:false
+69 silly placeDep ROOT jwa@2.0.1 OK for: jws@4.0.1 want: ^2.0.1
+70 silly fetch manifest ecdsa-sig-formatter@1.0.11
+71 silly packumentCache full:https://registry.npmjs.org/ecdsa-sig-formatter cache-miss
+72 silly fetch manifest buffer-equal-constant-time@^1.0.1
+73 silly packumentCache full:https://registry.npmjs.org/buffer-equal-constant-time cache-miss
+74 http fetch GET 200 https://registry.npmjs.org/buffer-equal-constant-time 109ms (cache miss)
+75 silly packumentCache full:https://registry.npmjs.org/buffer-equal-constant-time set size:undefined disposed:false
+76 http fetch GET 200 https://registry.npmjs.org/ecdsa-sig-formatter 328ms (cache miss)
+77 silly packumentCache full:https://registry.npmjs.org/ecdsa-sig-formatter set size:undefined disposed:false
+78 silly placeDep ROOT buffer-equal-constant-time@1.0.1 OK for: jwa@2.0.1 want: ^1.0.1
+79 silly placeDep ROOT ecdsa-sig-formatter@1.0.11 OK for: jwa@2.0.1 want: 1.0.11
+80 silly reify moves {}
+81 silly audit bulk request {
+81 silly audit   '@mongodb-js/saslprep': [ '1.5.4' ],
+81 silly audit   '@standard-schema/spec': [ '1.1.0' ],
+81 silly audit   '@types/webidl-conversions': [ '7.0.3' ],
+81 silly audit   '@types/whatwg-url': [ '13.0.0' ],
+81 silly audit   accepts: [ '2.0.0' ],
+81 silly audit   'agent-base': [ '6.0.2' ],
+81 silly audit   asynckit: [ '0.4.0' ],
+81 silly audit   axios: [ '1.20.0' ],
+81 silly audit   'basic-auth': [ '2.0.1' ],
+81 silly audit   'body-parser': [ '2.3.0' ],
+81 silly audit   'content-type': [ '2.1.0', '1.0.5' ],
+81 silly audit   bson: [ '7.3.3' ],
+81 silly audit   bytes: [ '3.1.2' ],
+81 silly audit   'call-bind-apply-helpers': [ '1.0.2' ],
+81 silly audit   'call-bound': [ '1.0.4' ],
+81 silly audit   'combined-stream': [ '1.0.8' ],
+81 silly audit   'content-disposition': [ '1.1.0' ],
+81 silly audit   cookie: [ '0.7.2' ],
+81 silly audit   'cookie-signature': [ '1.2.2' ],
+81 silly audit   cors: [ '2.8.6' ],
+81 silly audit   debug: [ '4.4.3', '2.6.9' ],
+81 silly audit   'delayed-stream': [ '1.0.0' ],
+81 silly audit   depd: [ '2.0.0' ],
+81 silly audit   dotenv: [ '17.4.2' ],
+81 silly audit   'dunder-proto': [ '1.0.1' ],
+81 silly audit   'ee-first': [ '1.1.1' ],
+81 silly audit   encodeurl: [ '2.0.0' ],
+81 silly audit   'es-define-property': [ '1.0.1' ],
+81 silly audit   'es-errors': [ '1.3.0' ],
+81 silly audit   'es-object-atoms': [ '1.1.2' ],
+81 silly audit   'es-set-tostringtag': [ '2.1.0' ],
+81 silly audit   'escape-html': [ '1.0.3' ],
+81 silly audit   etag: [ '1.8.1' ],
+81 silly audit   express: [ '5.2.1' ],
+81 silly audit   finalhandler: [ '2.1.1' ],
+81 silly audit   'follow-redirects': [ '1.16.0' ],
+81 silly audit   'form-data': [ '4.0.6' ],
+81 silly audit   'mime-db': [ '1.52.0', '1.54.0' ],
+81 silly audit   'mime-types': [ '2.1.35', '3.0.2' ],
+81 silly audit   forwarded: [ '0.2.0' ],
+81 silly audit   fresh: [ '2.0.0' ],
+81 silly audit   'function-bind': [ '1.1.2' ],
+81 silly audit   'get-intrinsic': [ '1.3.0' ],
+81 silly audit   'get-proto': [ '1.0.1' ],
+81 silly audit   gopd: [ '1.2.0' ],
+81 silly audit   'has-symbols': [ '1.1.0' ],
+81 silly audit   'has-tostringtag': [ '1.0.2' ],
+81 silly audit   hasown: [ '2.0.4' ],
+81 silly audit   helmet: [ '8.3.0' ],
+81 silly audit   'http-errors': [ '2.0.1' ],
+81 silly audit   'https-proxy-agent': [ '5.0.1' ],
+81 silly audit   'iconv-lite': [ '0.7.3' ],
+81 silly audit   inherits: [ '2.0.4' ],
+81 silly audit   'ipaddr.js': [ '1.9.1' ],
+81 silly audit   'is-promise': [ '4.0.0' ],
+81 silly audit   kareem: [ '3.4.0' ],
+81 silly audit   'math-intrinsics': [ '1.1.0' ],
+81 silly audit   'media-typer': [ '1.1.1' ],
+81 silly audit   'memory-pager': [ '1.5.0' ],
+81 silly audit   'merge-descriptors': [ '2.0.0' ],
+81 silly audit   mongodb: [ '7.6.0' ],
+81 silly audit   'mongodb-connection-string-url': [ '7.0.2' ],
+81 silly audit   mongoose: [ '9.10.1' ],
+81 silly audit   morgan: [ '1.12.1' ],
+81 silly audit   ms: [ '2.0.0', '2.1.3' ],
+81 silly audit   mpath: [ '0.9.0' ],
+81 silly audit   mquery: [ '6.0.0' ],
+81 silly audit   negotiator: [ '1.1.0' ],
+81 silly audit   'object-assign': [ '4.1.1' ],
+81 silly audit   'object-inspect': [ '1.13.4' ],
+81 silly audit   'on-finished': [ '2.4.1' ],
+81 silly audit   'on-headers': [ '1.1.0' ],
+81 silly audit   once: [ '1.4.0' ],
+81 silly audit   parseurl: [ '1.3.3' ],
+81 silly audit   'path-to-regexp': [ '8.4.2' ],
+81 silly audit   'proxy-addr': [ '2.0.8' ],
+81 silly audit   'proxy-from-env': [ '2.1.0' ],
+81 silly audit   punycode: [ '2.3.1' ],
+81 silly audit   qs: [ '6.16.0' ],
+81 silly audit   'range-parser': [ '1.3.0' ],
+81 silly audit   'raw-body': [ '3.0.2' ],
+81 silly audit   razorpay: [ '2.9.8' ],
+81 silly audit   router: [ '2.2.0' ],
+81 silly audit   'safe-buffer': [ '5.1.2' ],
+81 silly audit   'safer-buffer': [ '2.1.2' ],
+81 silly audit   send: [ '1.2.1' ],
+81 silly audit   'serve-static': [ '2.2.1' ],
+81 silly audit   setprototypeof: [ '1.2.0' ],
+81 silly audit   'side-channel': [ '1.1.1' ],
+81 silly audit   'side-channel-list': [ '1.0.1' ],
+81 silly audit   'side-channel-map': [ '1.0.1' ],
+81 silly audit   'side-channel-weakmap': [ '1.0.2' ],
+81 silly audit   sift: [ '17.1.3' ],
+81 silly audit   'sparse-bitfield': [ '3.0.3' ],
+81 silly audit   statuses: [ '2.0.2' ],
+81 silly audit   toidentifier: [ '1.0.1' ],
+81 silly audit   tr46: [ '5.1.1' ],
+81 silly audit   'type-is': [ '2.1.0' ],
+81 silly audit   unpipe: [ '1.0.0' ],
+81 silly audit   vary: [ '1.1.2' ],
+81 silly audit   'webidl-conversions': [ '7.0.0' ],
+81 silly audit   'whatwg-url': [ '14.2.0' ],
+81 silly audit   wrappy: [ '1.0.2' ],
+81 silly audit   jsonwebtoken: [ '9.0.3' ],
+81 silly audit   jws: [ '4.0.1' ],
+81 silly audit   'lodash.includes': [ '4.3.0' ],
+81 silly audit   'lodash.isboolean': [ '3.0.3' ],
+81 silly audit   'lodash.isinteger': [ '4.0.4' ],
+81 silly audit   'lodash.isnumber': [ '3.0.3' ],
+81 silly audit   'lodash.isplainobject': [ '4.0.6' ],
+81 silly audit   'lodash.isstring': [ '4.0.1' ],
+81 silly audit   'lodash.once': [ '4.1.1' ],
+81 silly audit   semver: [ '7.8.5' ],
+81 silly audit   jwa: [ '2.0.1' ],
+81 silly audit   'buffer-equal-constant-time': [ '1.0.1' ],
+81 silly audit   'ecdsa-sig-formatter': [ '1.0.11' ]
+81 silly audit }
+82 http cache ecdsa-sig-formatter@https://registry.npmjs.org/ecdsa-sig-formatter/-/ecdsa-sig-formatter-1.0.11.tgz 1ms (cache hit)
+83 http cache buffer-equal-constant-time@https://registry.npmjs.org/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz 0ms (cache hit)
+84 http cache jwa@https://registry.npmjs.org/jwa/-/jwa-2.0.1.tgz 0ms (cache hit)
+85 http cache lodash.once@https://registry.npmjs.org/lodash.once/-/lodash.once-4.1.1.tgz 0ms (cache hit)
+86 http cache lodash.isstring@https://registry.npmjs.org/lodash.isstring/-/lodash.isstring-4.0.1.tgz 0ms (cache hit)
+87 http cache semver@https://registry.npmjs.org/semver/-/semver-7.8.5.tgz 0ms (cache hit)
+88 http cache lodash.isplainobject@https://registry.npmjs.org/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz 0ms (cache hit)
+89 http cache lodash.isinteger@https://registry.npmjs.org/lodash.isinteger/-/lodash.isinteger-4.0.4.tgz 0ms (cache hit)
+90 http cache lodash.isnumber@https://registry.npmjs.org/lodash.isnumber/-/lodash.isnumber-3.0.3.tgz 0ms (cache hit)
+91 http cache lodash.isboolean@https://registry.npmjs.org/lodash.isboolean/-/lodash.isboolean-3.0.3.tgz 0ms (cache hit)
+92 silly tarball no local data for ecdsa-sig-formatter@https://registry.npmjs.org/ecdsa-sig-formatter/-/ecdsa-sig-formatter-1.0.11.tgz. Extracting by manifest.
+93 silly tarball no local data for buffer-equal-constant-time@https://registry.npmjs.org/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz. Extracting by manifest.
+94 http cache lodash.includes@https://registry.npmjs.org/lodash.includes/-/lodash.includes-4.3.0.tgz 0ms (cache hit)
+95 silly tarball no local data for jwa@https://registry.npmjs.org/jwa/-/jwa-2.0.1.tgz. Extracting by manifest.
+96 silly tarball no local data for lodash.once@https://registry.npmjs.org/lodash.once/-/lodash.once-4.1.1.tgz. Extracting by manifest.
+97 http cache jws@https://registry.npmjs.org/jws/-/jws-4.0.1.tgz 0ms (cache hit)
+98 silly tarball no local data for lodash.isstring@https://registry.npmjs.org/lodash.isstring/-/lodash.isstring-4.0.1.tgz. Extracting by manifest.
+99 silly tarball no local data for semver@https://registry.npmjs.org/semver/-/semver-7.8.5.tgz. Extracting by manifest.
+100 silly tarball no local data for lodash.isplainobject@https://registry.npmjs.org/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz. Extracting by manifest.
+101 silly tarball no local data for lodash.isinteger@https://registry.npmjs.org/lodash.isinteger/-/lodash.isinteger-4.0.4.tgz. Extracting by manifest.
+102 silly tarball no local data for lodash.isnumber@https://registry.npmjs.org/lodash.isnumber/-/lodash.isnumber-3.0.3.tgz. Extracting by manifest.
+103 silly tarball no local data for lodash.isboolean@https://registry.npmjs.org/lodash.isboolean/-/lodash.isboolean-3.0.3.tgz. Extracting by manifest.
+104 http cache jsonwebtoken@https://registry.npmjs.org/jsonwebtoken/-/jsonwebtoken-9.0.3.tgz 0ms (cache hit)
+105 silly tarball no local data for lodash.includes@https://registry.npmjs.org/lodash.includes/-/lodash.includes-4.3.0.tgz. Extracting by manifest.
+106 silly tarball no local data for jws@https://registry.npmjs.org/jws/-/jws-4.0.1.tgz. Extracting by manifest.
+107 silly tarball no local data for jsonwebtoken@https://registry.npmjs.org/jsonwebtoken/-/jsonwebtoken-9.0.3.tgz. Extracting by manifest.
+108 http fetch GET 200 https://registry.npmjs.org/lodash.isstring/-/lodash.isstring-4.0.1.tgz 145ms (cache miss)
+109 http fetch GET 200 https://registry.npmjs.org/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz 146ms (cache miss)
+110 http fetch GET 200 https://registry.npmjs.org/lodash.isnumber/-/lodash.isnumber-3.0.3.tgz 145ms (cache miss)
+111 http fetch GET 200 https://registry.npmjs.org/lodash.isinteger/-/lodash.isinteger-4.0.4.tgz 147ms (cache miss)
+112 http fetch GET 200 https://registry.npmjs.org/lodash.once/-/lodash.once-4.1.1.tgz 166ms (cache miss)
+113 http fetch GET 200 https://registry.npmjs.org/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz 173ms (cache miss)
+114 http fetch GET 200 https://registry.npmjs.org/jwa/-/jwa-2.0.1.tgz 173ms (cache miss)
+115 http fetch GET 200 https://registry.npmjs.org/ecdsa-sig-formatter/-/ecdsa-sig-formatter-1.0.11.tgz 194ms (cache miss)
+116 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 318ms
+117 silly audit report {}
+118 http fetch GET 200 https://registry.npmjs.org/lodash.isboolean/-/lodash.isboolean-3.0.3.tgz 329ms (cache miss)
+119 http fetch GET 200 https://registry.npmjs.org/lodash.includes/-/lodash.includes-4.3.0.tgz 330ms (cache miss)
+120 http fetch GET 200 https://registry.npmjs.org/semver/-/semver-7.8.5.tgz 345ms (cache miss)
+121 http fetch GET 200 https://registry.npmjs.org/jws/-/jws-4.0.1.tgz 336ms (cache miss)
+122 http fetch GET 200 https://registry.npmjs.org/jsonwebtoken/-/jsonwebtoken-9.0.3.tgz 362ms (cache miss)
+123 silly ADD node_modules/ecdsa-sig-formatter
+124 silly ADD node_modules/buffer-equal-constant-time
+125 silly ADD node_modules/jwa
+126 silly ADD node_modules/semver
+127 silly ADD node_modules/lodash.once
+128 silly ADD node_modules/lodash.isstring
+129 silly ADD node_modules/lodash.isplainobject
+130 silly ADD node_modules/lodash.isnumber
+131 silly ADD node_modules/lodash.isinteger
+132 silly ADD node_modules/lodash.isboolean
+133 silly ADD node_modules/lodash.includes
+134 silly ADD node_modules/jws
+135 silly ADD node_modules/jsonwebtoken
+136 verbose cwd C:\Users\SAGAR\Desktop\mobile-shop\server
+137 verbose os Windows_NT 10.0.26200
+138 verbose node v24.20.0
+139 verbose npm  v11.19.0
+140 notice
+140 notice New major version of npm available! 11.19.0 -> 12.0.2
+140 notice Changelog: https://github.com/npm/cli/releases/tag/v12.0.2
+140 notice To update run: npm install -g npm@12.0.2
+140 notice  { force: true, Symbol(proc-log.meta): true }
+141 verbose exit 0
+142 info ok

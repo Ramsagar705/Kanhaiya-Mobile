@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --color-premium-900: #0f172a;
+  --color-premium-800: #1e293b;
+  --color-premium-accent: #635bff;
+  --color-premium-lilac: #eef0ff;
+  --font-display: "Sora", "Segoe UI", sans-serif;
+  --font-body: "Manrope", "Segoe UI", sans-serif;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: #f7f8fb;
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, button, nav, input, select, textarea {
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+button, a, input, select, textarea {
+  transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid rgba(99, 91, 255, 0.28);
+  outline-offset: 2px;
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page-enter { animation: rise-in 500ms ease both; }
+.surface { background: #fff; border: 1px solid #e6e9f0; box-shadow: 0 14px 40px rgba(15, 23, 42, 0.06); }
