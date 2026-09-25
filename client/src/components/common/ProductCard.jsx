@@ -48,10 +48,10 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <article className="group relative overflow-hidden rounded-[20px] border border-slate-200 bg-white shadow-[0_10px_30px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(15,23,42,0.1)]">
-      <div className="absolute left-4 top-4 z-10">
+    <article className="group relative min-w-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_10px_30px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(15,23,42,0.1)] sm:rounded-[20px]">
+      <div className="absolute left-2 top-2 z-10 sm:left-4 sm:top-4">
         <span
-          className={`rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.12em] ${
+          className={`rounded-full px-1.5 py-0.5 text-[8px] font-black uppercase tracking-[0.08em] sm:px-3 sm:py-1 sm:text-[10px] sm:tracking-[0.12em] ${
             product.type === 'new' ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'
           }`}
         >
@@ -59,7 +59,7 @@ const ProductCard = ({ product }) => {
         </span>
       </div>
 
-      <Link to={`/product/${product._id}`} className="block aspect-[1.05] overflow-hidden bg-[#f4f5f8] p-5">
+      <Link to={`/product/${product._id}`} className="flex h-[130px] w-full items-center justify-center overflow-hidden bg-[#f4f5f8] p-1.5 sm:aspect-[1.05] sm:h-auto sm:p-5">
         <img
           src={productImage}
           alt={product.title}
@@ -67,46 +67,46 @@ const ProductCard = ({ product }) => {
         />
       </Link>
 
-      <div className="p-5">
-        <div className="flex items-start justify-between gap-3">
+      <div className="p-2 sm:p-5">
+        <div className="flex items-start justify-between gap-1 sm:gap-3">
           <div className="min-w-0">
-            <p className="mb-1 text-xs font-bold uppercase tracking-[0.12em] text-slate-400">{product.brand}</p>
-            <h3 className="truncate text-base font-black text-slate-900">{product.title}</h3>
+            <p className="mb-0.5 text-[9px] font-bold uppercase tracking-[0.08em] text-slate-400 sm:mb-1 sm:text-xs sm:tracking-[0.12em]">{product.brand}</p>
+            <h3 className="truncate text-xs font-black text-slate-900 sm:text-base">{product.title}</h3>
           </div>
           <button
             type="button"
             onClick={toggleWishlist}
-            className={`shrink-0 rounded-full border p-2 transition-colors ${liked ? 'border-red-200 bg-red-50 text-red-500' : 'border-slate-200 text-slate-400 hover:border-red-200 hover:text-red-500'}`}
+            className={`shrink-0 rounded-full border p-1 transition-colors sm:p-2 ${liked ? 'border-red-200 bg-red-50 text-red-500' : 'border-slate-200 text-slate-400 hover:border-red-200 hover:text-red-500'}`}
             aria-label={liked ? 'Remove from wishlist' : 'Add to wishlist'}
           >
-            <Heart size={16} fill={liked ? 'currentColor' : 'none'} />
+            <Heart size={14} fill={liked ? 'currentColor' : 'none'} />
           </button>
         </div>
 
-        <div className="mb-4 mt-4 flex items-baseline gap-2">
-          <span className="text-xl font-black text-slate-900">
+        <div className="mb-2 mt-2 flex items-baseline gap-1 sm:mb-4 sm:mt-4 sm:gap-2">
+          <span className="text-base font-semibold text-slate-900 sm:text-xl sm:font-black">
             ₹{Number(product.price).toLocaleString()}
           </span>
           {hasDiscount && (
-            <span className="text-xs text-slate-400 line-through">
+            <span className="text-[9px] text-slate-400 line-through sm:text-xs">
               ₹{Number(product.originalPrice).toLocaleString()}
             </span>
           )}
         </div>
 
         {cartMessage && (
-          <p className="mb-3 text-xs font-bold text-emerald-600" aria-live="polite">
+          <p className="mb-1 text-[10px] font-bold text-emerald-600 sm:mb-3 sm:text-xs" aria-live="polite">
             {cartMessage}
           </p>
         )}
 
-        <div className="flex gap-2">
+        <div className="flex gap-1 sm:gap-2">
           <button
             type="button"
             onClick={handleAddToCart}
-            className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-premium-900 py-2.5 text-sm font-bold text-white hover:bg-premium-800"
+            className="flex min-h-9 flex-1 items-center justify-center gap-1 rounded-lg bg-premium-900 px-1 py-1.5 text-[11px] font-bold text-white hover:bg-premium-800 sm:min-h-10 sm:gap-2 sm:rounded-xl sm:px-2 sm:py-2.5 sm:text-sm"
           >
-            <ShoppingCart size={18} className="shrink-0" />
+            <ShoppingCart size={16} className="h-3.5 w-3.5 shrink-0 sm:h-[18px] sm:w-[18px]" />
             <span>Add To Cart</span>
           </button>
         </div>

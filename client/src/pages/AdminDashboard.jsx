@@ -347,7 +347,7 @@ const AdminDashboard = () => {
           <h1 className="mt-2 text-4xl font-black text-slate-900">Admin dashboard</h1>
           <p className="mt-2 text-sm text-slate-500">Manage the store, products, banners, and customer orders.</p>
         </div>
-        <Link to="/" className="hidden items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-bold hover:border-premium-accent sm:flex">
+        <Link to="/products" className="hidden items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-bold hover:border-premium-accent sm:flex">
           View Store
         </Link>
       </div>
@@ -406,21 +406,15 @@ const AdminDashboard = () => {
               </div>
               <div className="space-y-3">
                 {orders.slice(0, 6).map((order) => (
-                  <div key={order._id} className="border rounded-xl p-3">
-                    <div className="flex items-center justify-between gap-3">
-                      <div>
+                  <div key={order._id} className="box-border w-full max-w-full rounded-xl border p-3">
+                    <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+                      <div className="min-w-0 w-full">
                         <p className="font-semibold">{order.user?.name || 'Customer'}</p>
-                        <p className="text-xs text-gray-500">{order.user?.email}</p>
+                        <p className="wrap-break-word text-xs text-gray-500">{order.user?.email}</p>
                         <p className="text-xs text-gray-600 mt-1">Mobile: {order.shippingAddress?.phone || 'Not provided'}</p>
                       </div>
-                      <div className="flex flex-col items-end gap-1">
-                        <span className={`text-[10px] px-2 py-1 rounded-full font-bold ${order.paymentStatus === 'paid' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
-                          {order.paymentStatus || 'pending'}
-                        </span>
-                        <span className="text-[10px] bg-gray-100 px-2 py-1 rounded-full">{order.orderStatus}</span>
-                      </div>
                     </div>
-                    <div className="mt-2 text-xs text-gray-600">
+                    <div className="mt-2 wrap-break-word text-xs text-gray-600">
                       <span className="font-semibold text-gray-700">Delivery address: </span>
                       {[
                         order.shippingAddress?.address,
@@ -431,16 +425,24 @@ const AdminDashboard = () => {
                         .filter(Boolean)
                         .join(', ') || 'Not provided'}
                     </div>
-                    <div className="mt-3 flex items-center justify-between text-sm text-gray-600">
+                    <div className="mt-3 flex min-w-0 items-center justify-between gap-3 text-sm text-gray-600">
                       <span>{order.items?.length || 0} items</span>
-                      <span className="font-semibold text-gray-900">{formatCurrency(order.totalAmount)}</span>
+                      <span className="shrink-0 font-semibold text-gray-900">{formatCurrency(order.totalAmount)}</span>
                     </div>
-                    <div className="mt-3 flex gap-2 flex-wrap">
+                    <div className="mt-3 flex max-w-full flex-wrap gap-2">
+                      <span className={`max-w-full wrap-break-word rounded-full border px-2 py-1 text-[10px] font-bold uppercase tracking-wide sm:px-2.5 ${order.paymentStatus === 'paid' ? 'border-emerald-200 bg-emerald-50 text-emerald-700' : 'border-amber-200 bg-amber-50 text-amber-700'}`}>
+                        Payment: {order.paymentStatus || 'pending'}
+                      </span>
+                      <span className={`max-w-full wrap-break-word rounded-full border px-2 py-1 text-[10px] font-bold uppercase tracking-wide sm:px-2.5 ${order.orderStatus === 'confirmed' ? 'border-blue-200 bg-blue-50 text-blue-700' : 'border-slate-200 bg-slate-100 text-slate-600'}`}>
+                        Order: {order.orderStatus || 'pending'}
+                      </span>
+                    </div>
+                    <div className="mt-3 flex max-w-full flex-wrap gap-1.5 sm:gap-2">
                       {['pending', 'confirmed', 'processing', 'shipped', 'delivered'].map((status) => (
                         <button
                           key={status}
                           onClick={() => updateOrderStatus(order._id, status)}
-                          className={`px-2 py-1 text-xs rounded-full border ${order.orderStatus === status ? 'bg-premium-900 text-white border-premium-900' : 'bg-white text-gray-700'}`}
+                          className={`max-w-full rounded-full border px-2 py-1 text-[11px] font-semibold capitalize transition-colors sm:px-2.5 sm:text-xs ${order.orderStatus === status ? (status === 'confirmed' ? 'border-blue-600 bg-blue-600 text-white' : 'border-premium-900 bg-premium-900 text-white') : 'border-gray-200 bg-white text-gray-700 hover:border-premium-accent'}`}
                         >
                           {status}
                         </button>
