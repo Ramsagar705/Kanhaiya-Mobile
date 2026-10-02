@@ -45,11 +45,6 @@ const BannerCarousel = () => {
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-premium-accent">KANHAIYA MOBILE</p>
           <h2 className="mt-3 text-3xl font-black leading-tight sm:text-5xl">{slide.title}</h2>
           <p className="mt-3 max-w-md text-sm text-slate-200 sm:text-base">{slide.subtitle}</p>
-          {slide.link && (
-            <a href={slide.link} className="mt-6 w-fit rounded-full bg-premium-accent px-5 py-2.5 text-sm font-bold text-white hover:bg-premium-800">
-              Shop now
-            </a>
-          )}
         </div>
         {slides.length > 1 && (
           <>
