@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { Heart, Search, ShoppingBag, Smartphone, Store, User } from 'lucide-react';
+import { Heart, Search, ShoppingBag, Smartphone, Store, User, Wrench } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
 
 export const MobileBottomNav = () => (
   <div className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 shadow-[0_-8px_24px_rgba(15,23,42,0.08)] backdrop-blur-xl md:hidden">
-    <div className="mx-auto grid max-w-lg grid-cols-4 gap-1">
+    <div className="mx-auto grid max-w-lg grid-cols-5 gap-1">
       <NavLink to="/products/new" className={({ isActive }) => `flex flex-col items-center gap-1 rounded-xl px-1 py-1.5 text-[10px] font-bold ${isActive ? 'text-premium-accent' : 'text-slate-500'}`}>
         <Smartphone size={18} /> New Phones
       </NavLink>
@@ -15,6 +15,9 @@ export const MobileBottomNav = () => (
       </NavLink>
       <NavLink to="/orders" className={({ isActive }) => `flex flex-col items-center gap-1 rounded-xl px-1 py-1.5 text-[10px] font-bold ${isActive ? 'text-premium-accent' : 'text-slate-500'}`}>
         <User size={18} /> My Orders
+      </NavLink>
+      <NavLink to="/repair-services" aria-label="Repair Services" className={({ isActive }) => `flex flex-col items-center gap-1 rounded-xl px-1 py-1.5 text-[10px] font-bold ${isActive ? 'text-premium-accent' : 'text-slate-500'}`}>
+        <Wrench size={18} /> Repairs
       </NavLink>
       <NavLink to="/store" className={({ isActive }) => `flex flex-col items-center gap-1 rounded-xl px-1 py-1.5 text-[10px] font-bold ${isActive ? 'text-premium-accent' : 'text-slate-500'}`}>
         <Store size={18} /> Our Store
@@ -53,12 +56,15 @@ const Navbar = () => {
             </span>
           </Link>
 
-          <div className="hidden items-center gap-7 text-sm font-bold text-slate-500 md:flex">
+          <div className="hidden items-center gap-4 text-xs font-bold text-slate-500 md:flex lg:gap-7 lg:text-sm">
             <NavLink to="/products/new" className={({ isActive }) => `transition-colors hover:text-premium-accent ${isActive ? 'text-premium-accent' : ''}`}>
               NEW PHONES
             </NavLink>
             <NavLink to="/products/used" className={({ isActive }) => `transition-colors hover:text-premium-accent ${isActive ? 'text-premium-accent' : ''}`}>
               SECOND HAND
+            </NavLink>
+            <NavLink to="/repair-services" className={({ isActive }) => `transition-colors hover:text-premium-accent ${isActive ? 'text-premium-accent' : ''}`}>
+              REPAIR SERVICES
             </NavLink>
             <NavLink to="/store" className={({ isActive }) => `transition-colors hover:text-premium-accent ${isActive ? 'text-premium-accent' : ''}`}>
               OUR STORE
