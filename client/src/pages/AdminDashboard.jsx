@@ -55,6 +55,7 @@ const AdminDashboard = () => {
   const [previewImageIndex, setPreviewImageIndex] = useState(0);
   const [selectedImages, setSelectedImages] = useState([]);
   const [selectedImagePreviews, setSelectedImagePreviews] = useState([]);
+  const [photoError, setPhotoError] = useState('');
   const [activeSection, setActiveSection] = useState('orders');
 
   const adminSections = [
@@ -111,6 +112,7 @@ const AdminDashboard = () => {
     setEditingProductId(null);
     setPreviewImageIndex(0);
     setSelectedImages([]);
+    setPhotoError('');
   };
 
   const handleProductInput = (field, value) => {
@@ -166,13 +168,14 @@ const AdminDashboard = () => {
   const handleProductSubmit = async (e) => {
     e.preventDefault();
     setProductMessage('');
+    setPhotoError('');
 
     try {
       console.log('Selected product images:', selectedImages);
       console.log('Are Files:', selectedImages.every((image) => image instanceof File));
 
-      if (!editingProductId && selectedImages.length < 5) {
-        alert('Please select at least 5 product photos before creating the product.');
+      if (!editingProductId && selectedImages.length < 1) {
+        setPhotoError('Please upload at least 1 product photo.');
         return;
       }
 
@@ -577,12 +580,19 @@ const AdminDashboard = () => {
                     accept="image/*"
                     multiple
                     onChange={(event) => {
-                      const files = Array.from(event.target.files || []).slice(0, 5);
+                      const files = Array.from(event.target.files || []);
+                      if (files.length > 5) {
+                        setPhotoError('Maximum 5 photos allowed.');
+                        event.target.value = '';
+                        return;
+                      }
+                      setPhotoError('');
                       setSelectedImages(files);
                       setPreviewImageIndex(0);
                     }}
                     className="border rounded-xl px-3 py-2 w-full"
                   />
+                  {photoError && <p className="text-xs font-semibold text-red-600">{photoError}</p>}
                   {selectedImages.length > 0 && (
                     <p className="text-xs text-gray-500">
                       {selectedImages.map((image) => image.name).join(', ')}

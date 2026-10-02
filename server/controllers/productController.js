@@ -34,10 +34,17 @@ exports.createProduct = async (req, res) => {
   try {
     const files = req.files || [];
 
-    if (files.length < 5) {
+    if (files.length < 1) {
       return res.status(400).json({
         success: false,
-        message: 'Please select at least 5 product photos to upload.',
+        message: 'Please upload at least 1 product photo.',
+      });
+    }
+
+    if (files.length > 5) {
+      return res.status(400).json({
+        success: false,
+        message: 'Maximum 5 photos allowed.',
       });
     }
 
