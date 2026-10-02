@@ -41,7 +41,6 @@ const BannerCarousel = () => {
     <section className="relative overflow-hidden bg-premium-900" aria-label="Store offers and new mobile phones">
       <div className="relative mx-auto h-[260px] max-w-7xl sm:h-[340px] lg:h-[420px]">
         <img src={slide.image} alt={slide.title || 'Mobile phone offer'} className="absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-premium-900/90 via-premium-900/55 to-transparent" />
         <div className="relative z-10 flex h-full max-w-xl flex-col justify-center px-6 text-white sm:px-10 lg:px-14">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-premium-accent">KANHAIYA MOBILE</p>
           <h2 className="mt-3 text-3xl font-black leading-tight sm:text-5xl">{slide.title}</h2>
