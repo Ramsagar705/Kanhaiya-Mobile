@@ -19,6 +19,7 @@ const Products = () => {
   const { type } = useParams();
   const [params] = useSearchParams();
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [sort, setSort] = useState('');
   const [priceRange, setPriceRange] = useState('');
   const [error, setError] = useState('');
@@ -28,21 +29,39 @@ const Products = () => {
   const apiType = type === 'used' ? 'second_hand' : type === 'new' ? 'new' : '';
 
   useEffect(() => {
+    const controller = new AbortController();
     const query = new URLSearchParams();
     if (apiType) query.set('type', apiType);
     if (sort) query.set('sort', sort);
-    api
-      .get(`/products?${query.toString()}`)
-      .then((res) => setProducts(res.data.products || []))
-      .catch((error) => {
-        console.error('[Products page] Could not load products', {
-          requestedUrl: `${error.config?.baseURL || ''}${error.config?.url || ''}`,
-          status: error.response?.status,
-          backendResponse: error.response?.data,
-          message: error.message,
+
+    const fetchProducts = async () => {
+      setLoading(true);
+      setError('');
+
+      try {
+        const response = await api.get(`/products?${query.toString()}`, {
+          signal: controller.signal,
         });
-        setError('Could not load products.');
-      });
+        if (!Array.isArray(response.data?.products)) {
+          throw new Error('The products response was invalid.');
+        }
+        if (!controller.signal.aborted) setProducts(response.data.products);
+      } catch (requestError) {
+        if (controller.signal.aborted) return;
+        console.error('[Products page] Could not load products', {
+          requestedUrl: `${requestError.config?.baseURL || ''}${requestError.config?.url || ''}`,
+          status: requestError.response?.status,
+          backendResponse: requestError.response?.data,
+          message: requestError.message,
+        });
+        setError('Unable to load products. Please try again.');
+      } finally {
+        if (!controller.signal.aborted) setLoading(false);
+      }
+    };
+
+    fetchProducts();
+    return () => controller.abort();
   }, [apiType, sort]);
 
   useEffect(() => {
@@ -144,13 +163,33 @@ const Products = () => {
           </select>
         </div>
       </div>
-      {error && <p className="text-red-600 mb-4">{error}</p>}
-      <div className="grid grid-cols-2 gap-2.5 sm:gap-5 lg:grid-cols-4">
-        {filtered.map((product) => (
-          <ProductCard key={product._id} product={product} />
-        ))}
-      </div>
-      {!filtered.length && !error && <p className="text-gray-500">No phones found.</p>}
+      {loading ? (
+        <div className="grid grid-cols-2 gap-2.5 sm:gap-5 lg:grid-cols-4" role="status" aria-label="Loading products">
+          {Array.from({ length: 8 }, (_, index) => (
+            <div key={index} className="animate-pulse rounded-xl border border-slate-200 bg-white p-2 sm:rounded-[20px] sm:p-5" aria-hidden="true">
+              <div className="h-32.5 rounded-lg bg-slate-100 sm:h-55" />
+              <div className="mt-3 h-3 w-1/3 rounded bg-slate-100" />
+              <div className="mt-2 h-5 w-4/5 rounded bg-slate-100" />
+              <div className="mt-4 h-5 w-1/2 rounded bg-slate-100" />
+            </div>
+          ))}
+        </div>
+      ) : error ? (
+        <p className="mb-4 text-red-600">{error}</p>
+      ) : (
+        <>
+          <div className="grid grid-cols-2 gap-2.5 sm:gap-5 lg:grid-cols-4">
+            {filtered.map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
+          </div>
+          {products.length === 0 ? (
+            <p className="text-gray-500">No phones found.</p>
+          ) : !filtered.length ? (
+            <p className="text-gray-500">No phones match your search or filters.</p>
+          ) : null}
+        </>
+      )}
     </div>
   );
 };
