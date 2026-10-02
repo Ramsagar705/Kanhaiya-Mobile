@@ -46,10 +46,10 @@ const ProductDetail = () => {
   const warrantyText = product.warranty || '12 months warranty';
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-      <div className="surface rounded-[28px] p-4 sm:p-6">
+    <div className="grid w-full min-w-0 gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
+      <div className="surface w-full min-w-0 rounded-[28px] p-3 sm:p-6">
         <div className="relative overflow-hidden rounded-[22px] bg-[#f4f5f8]">
-          <img src={currentImage} alt={`${product.title} view ${mainImageIndex + 1}`} className="h-100 w-full object-contain p-6 sm:h-136" />
+          <img src={currentImage} alt={`${product.title} view ${mainImageIndex + 1}`} className="h-[min(25rem,90vw)] w-full min-w-0 object-contain p-4 sm:h-136 sm:p-6" />
           {images.length > 1 && (
             <>
               <button
@@ -91,9 +91,9 @@ const ProductDetail = () => {
         )}
       </div>
 
-      <div className="pt-2 lg:pt-8">
+      <div className="min-w-0 pt-2 lg:pt-8">
         <p className="text-xs font-black uppercase tracking-[0.2em] text-premium-accent">{product.brand}</p>
-        <h1 className="mt-3 text-4xl font-black leading-tight">{product.title}</h1>
+        <h1 className="mt-3 break-words text-4xl font-black leading-tight">{product.title}</h1>
         <div className="mt-4 flex items-center gap-2 text-sm"><span className="text-amber-500">★★★★★</span><span className="text-slate-500">4.8 · Highly rated</span></div>
         <p className="mt-5 max-w-xl leading-7 text-slate-500">{product.description}</p>
         <div className="mt-7 flex items-end gap-3">
@@ -131,18 +131,18 @@ const ProductDetail = () => {
         <div className="mt-8 grid grid-cols-2 gap-3 border-y border-slate-200 py-5 text-xs text-slate-500 sm:grid-cols-4">
           {[[Truck, 'Fast delivery'], [ShieldCheck, 'Warranty'], [RotateCcw, 'Easy returns'], [BadgeCheck, 'Genuine']].map(([Icon, label]) => <div key={label} className="flex flex-col gap-2"><Icon size={18} className="text-premium-accent" /><span>{label}</span></div>)}
         </div>
-        <dl className="mt-6 grid grid-cols-2 gap-3 text-sm">
+        <dl className="mt-6 grid min-w-0 grid-cols-1 gap-3 text-sm min-[380px]:grid-cols-2">
           {Object.entries(specs).map(([key, value]) =>
             value ? (
-              <div key={key} className="rounded-xl border border-slate-200 bg-white p-3">
+              <div key={key} className="min-w-0 rounded-xl border border-slate-200 bg-white p-3">
                 <dt className="capitalize text-slate-400">{key}</dt>
-                <dd className="font-semibold">{String(value)}</dd>
+                <dd className="break-words font-semibold">{String(value)}</dd>
               </div>
             ) : null
           )}
-          <div className="rounded-xl border border-slate-200 bg-white p-3">
+          <div className="min-w-0 rounded-xl border border-slate-200 bg-white p-3">
             <dt className="capitalize text-slate-400">warranty</dt>
-            <dd className="font-semibold">{warrantyText}</dd>
+            <dd className="break-words font-semibold">{warrantyText}</dd>
           </div>
         </dl>
       </div>

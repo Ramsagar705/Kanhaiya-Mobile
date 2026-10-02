@@ -44,9 +44,9 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
-        <div className="flex h-20 items-center justify-between gap-2 sm:gap-5">
+    <nav className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
+        <div className="flex h-20 min-w-0 items-center justify-between gap-2 sm:gap-5">
           <Link to="/products" className="flex min-w-0 shrink items-center gap-2 sm:gap-3">
             <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-premium-900 text-xs font-black tracking-[0.08em] text-white shadow-lg shadow-slate-900/10 sm:h-10 sm:w-10 sm:text-sm">
               KM
