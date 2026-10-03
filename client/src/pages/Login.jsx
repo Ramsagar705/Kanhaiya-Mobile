@@ -8,7 +8,7 @@ const Login = () => {
   const { login, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const [form, setForm] = useState({ email: 'admin@mobishop.com', password: 'admin123' });
+  const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
@@ -41,6 +41,7 @@ const Login = () => {
       <form onSubmit={onSubmit} className="space-y-4">
         <input
           type="email"
+          autoComplete="username"
           required
           placeholder="Email"
           value={form.email}
@@ -50,6 +51,7 @@ const Login = () => {
         <div className="relative">
           <input
             type={showPassword ? 'text' : 'password'}
+            autoComplete="current-password"
             required
             minLength={6}
             placeholder="Password"
