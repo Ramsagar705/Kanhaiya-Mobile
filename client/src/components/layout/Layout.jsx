@@ -24,7 +24,7 @@ const Layout = () => (
         </div>
         <div><p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">Shop</p><div className="mt-4 space-y-3 text-sm text-slate-600"><Link className="block hover:text-premium-accent" to="/products/new">New Phones</Link><Link className="block hover:text-premium-accent" to="/products/used">Second Hand</Link></div></div>
         <div><p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">Support</p><div className="mt-4 space-y-3 text-sm text-slate-600"><Link className="block hover:text-premium-accent" to="/store">Our Store</Link><span className="block">Shipping & returns</span><span className="block">Warranty information</span></div></div>
-        <div><p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">Visit</p><p className="mt-4 text-sm leading-6 text-slate-600">Beside India Coffee House<br />Shop No 101, Supela<br />Bhilai, Chhattisgarh</p></div>
+        <div><p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">Visit</p><p className="mt-4 text-sm leading-6 text-slate-600">Shop 101, Akashdeep Complex<br />Near India Coffee House, Akashganga<br />Supela, Bhilai</p></div>
       </div>
       <div className="border-t border-slate-100 py-5 text-center text-xs text-slate-400">© {new Date().getFullYear()} Kanhaiya Mobile. All rights reserved.</div>
     </footer>

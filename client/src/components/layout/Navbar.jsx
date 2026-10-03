@@ -16,8 +16,8 @@ export const MobileBottomNav = () => (
       <NavLink to="/orders" className={({ isActive }) => `flex flex-col items-center gap-1 rounded-xl px-1 py-1.5 text-[10px] font-bold ${isActive ? 'text-premium-accent' : 'text-slate-500'}`}>
         <User size={18} /> My Orders
       </NavLink>
-      <NavLink to="/repair-services" aria-label="Repair Services" className={({ isActive }) => `flex flex-col items-center gap-1 rounded-xl px-1 py-1.5 text-[10px] font-bold ${isActive ? 'text-premium-accent' : 'text-slate-500'}`}>
-        <Wrench size={18} /> Repairs
+      <NavLink to="/repair-services" aria-label="Exchange & Repair" className={({ isActive }) => `flex flex-col items-center gap-1 rounded-xl px-1 py-1.5 text-[10px] font-bold ${isActive ? 'text-premium-accent' : 'text-slate-500'}`}>
+        <Wrench size={18} /> Exchange & Repair
       </NavLink>
       <NavLink to="/store" className={({ isActive }) => `flex flex-col items-center gap-1 rounded-xl px-1 py-1.5 text-[10px] font-bold ${isActive ? 'text-premium-accent' : 'text-slate-500'}`}>
         <Store size={18} /> Our Store
@@ -64,7 +64,7 @@ const Navbar = () => {
               SECOND HAND
             </NavLink>
             <NavLink to="/repair-services" className={({ isActive }) => `transition-colors hover:text-premium-accent ${isActive ? 'text-premium-accent' : ''}`}>
-              REPAIR SERVICES
+              EXCHANGE & REPAIR
             </NavLink>
             <NavLink to="/store" className={({ isActive }) => `transition-colors hover:text-premium-accent ${isActive ? 'text-premium-accent' : ''}`}>
               OUR STORE

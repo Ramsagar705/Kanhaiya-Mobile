@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 
 const store = {
-  address: 'Beside India Coffee House, Shop No. 101, Supela, Bhilai, Chhattisgarh',
+  address: 'Shop 101, Akashdeep Complex, near India Coffee House, Akashganga, Supela, Bhilai',
   phone: '+91 93000 06031',
   phoneHref: 'tel:+919300006031',
   whatsappHref: 'https://wa.me/919300006031',

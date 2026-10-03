@@ -13,6 +13,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import AdminRoute from './components/common/AdminRoute';
 import Store from './pages/Store';
 import RepairServices from './pages/RepairServices';
+import Exchange from './pages/Exchange';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/contact" element={<Navigate to="/store" replace />} />
           <Route path="/store" element={<Store />} />
           <Route path="/repair-services" element={<RepairServices />} />
+          <Route path="/exchange" element={<Exchange />} />
           <Route path="/cart" element={<Cart />} />
           <Route
             path="/checkout"
