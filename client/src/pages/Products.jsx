@@ -5,23 +5,11 @@ import api from '../services/api';
 import ProductCard from '../components/common/ProductCard';
 import BannerCarousel from '../components/layout/BannerCarousel';
 
-const priceRanges = [
-  { value: 'under-5000', label: 'Under ₹5,000' },
-  { value: '5000-10000', label: '₹5,000 – ₹10,000' },
-  { value: '10000-20000', label: '₹10,000 – ₹20,000' },
-  { value: '20000-30000', label: '₹20,000 – ₹30,000' },
-  { value: '30000-50000', label: '₹30,000 – ₹50,000' },
-  { value: '50000-80000', label: '₹50,000 – ₹80,000' },
-  { value: '80000-plus', label: '₹80,000+' },
-];
-
-const Products = () => {
+const Products = ({ dealsOnly = false }) => {
   const { type } = useParams();
   const [params] = useSearchParams();
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [sort, setSort] = useState('');
-  const [priceRange, setPriceRange] = useState('');
   const [error, setError] = useState('');
   const q = params.get('q') || '';
   const [searchQuery, setSearchQuery] = useState(q);
@@ -29,39 +17,21 @@ const Products = () => {
   const apiType = type === 'used' ? 'second_hand' : type === 'new' ? 'new' : '';
 
   useEffect(() => {
-    const controller = new AbortController();
     const query = new URLSearchParams();
     if (apiType) query.set('type', apiType);
     if (sort) query.set('sort', sort);
-
-    const fetchProducts = async () => {
-      setLoading(true);
-      setError('');
-
-      try {
-        const response = await api.get(`/products?${query.toString()}`, {
-          signal: controller.signal,
-        });
-        if (!Array.isArray(response.data?.products)) {
-          throw new Error('The products response was invalid.');
-        }
-        if (!controller.signal.aborted) setProducts(response.data.products);
-      } catch (requestError) {
-        if (controller.signal.aborted) return;
+    api
+      .get(`/products?${query.toString()}`)
+      .then((res) => setProducts(res.data.products || []))
+      .catch((error) => {
         console.error('[Products page] Could not load products', {
-          requestedUrl: `${requestError.config?.baseURL || ''}${requestError.config?.url || ''}`,
-          status: requestError.response?.status,
-          backendResponse: requestError.response?.data,
-          message: requestError.message,
+          requestedUrl: `${error.config?.baseURL || ''}${error.config?.url || ''}`,
+          status: error.response?.status,
+          backendResponse: error.response?.data,
+          message: error.message,
         });
-        setError('Unable to load products. Please try again.');
-      } finally {
-        if (!controller.signal.aborted) setLoading(false);
-      }
-    };
-
-    fetchProducts();
-    return () => controller.abort();
+        setError('Could not load products.');
+      });
   }, [apiType, sort]);
 
   useEffect(() => {
@@ -70,19 +40,7 @@ const Products = () => {
 
   const filtered = useMemo(() => {
     let list = products;
-    if (priceRange) {
-      list = list.filter((product) => {
-        const price = Number(product.price);
-        if (!Number.isFinite(price)) return false;
-        if (priceRange === 'under-5000') return price < 5000;
-        if (priceRange === '5000-10000') return price >= 5000 && price <= 10000;
-        if (priceRange === '10000-20000') return price > 10000 && price <= 20000;
-        if (priceRange === '20000-30000') return price > 20000 && price <= 30000;
-        if (priceRange === '30000-50000') return price > 30000 && price <= 50000;
-        if (priceRange === '50000-80000') return price > 50000 && price <= 80000;
-        return price >= 80000;
-      });
-    }
+    if (dealsOnly) list = list.filter((p) => p.originalPrice > p.price);
     if (searchQuery.trim()) {
       const term = searchQuery.trim().toLowerCase();
       list = list.filter(
@@ -94,15 +52,17 @@ const Products = () => {
       );
     }
     return list;
-  }, [products, priceRange, searchQuery]);
+  }, [products, dealsOnly, searchQuery]);
 
-  const heading = type === 'new'
-    ? 'New phones'
-    : type === 'used'
-      ? 'Second-hand phones'
-      : q
-        ? `Results for “${q}”`
-        : 'All phones';
+  const heading = dealsOnly
+    ? 'Best deals'
+    : type === 'new'
+      ? 'New phones'
+      : type === 'used'
+        ? 'Second-hand phones'
+        : q
+          ? `Results for “${q}”`
+          : 'All phones';
 
   return (
     <div className="space-y-8">
@@ -139,57 +99,23 @@ const Products = () => {
       )}
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div><p className="text-xs font-black uppercase tracking-[0.2em] text-premium-accent">Explore the collection</p><h1 className="mt-2 text-4xl font-black">{heading}</h1><p className="mt-2 text-sm text-slate-500">Compare carefully selected phones, all in one place.</p></div>
-        <div className="flex w-full flex-wrap gap-2 sm:w-auto sm:justify-end">
-          <select
-            value={priceRange}
-            onChange={(e) => setPriceRange(e.target.value)}
-            aria-label="Filter by price"
-            className={`min-w-0 flex-1 rounded-full border px-3 py-2.5 text-xs font-bold shadow-sm sm:flex-none sm:px-4 sm:text-sm ${priceRange ? 'border-premium-accent bg-premium-lilac text-premium-900' : 'border-slate-200 bg-white text-slate-600'}`}
-          >
-            <option value="">All Prices</option>
-            {priceRanges.map((range) => (
-              <option key={range.value} value={range.value}>{range.label}</option>
-            ))}
-          </select>
-          <select
-            value={sort}
-            onChange={(e) => setSort(e.target.value)}
-            aria-label="Sort products"
-            className="min-w-0 flex-1 rounded-full border border-slate-200 bg-white px-3 py-2.5 text-xs font-bold text-slate-600 shadow-sm sm:flex-none sm:px-4 sm:text-sm"
-          >
-            <option value="">Newest</option>
-            <option value="price_low">Price: low to high</option>
-            <option value="price_high">Price: high to low</option>
-          </select>
-        </div>
+        <select
+          value={sort}
+          onChange={(e) => setSort(e.target.value)}
+          className="rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-bold text-slate-600 shadow-sm"
+        >
+          <option value="">Newest</option>
+          <option value="price_low">Price: low to high</option>
+          <option value="price_high">Price: high to low</option>
+        </select>
       </div>
-      {loading ? (
-        <div className="grid grid-cols-2 gap-2.5 sm:gap-5 lg:grid-cols-4" role="status" aria-label="Loading products">
-          {Array.from({ length: 8 }, (_, index) => (
-            <div key={index} className="animate-pulse rounded-xl border border-slate-200 bg-white p-2 sm:rounded-[20px] sm:p-5" aria-hidden="true">
-              <div className="h-32.5 rounded-lg bg-slate-100 sm:h-55" />
-              <div className="mt-3 h-3 w-1/3 rounded bg-slate-100" />
-              <div className="mt-2 h-5 w-4/5 rounded bg-slate-100" />
-              <div className="mt-4 h-5 w-1/2 rounded bg-slate-100" />
-            </div>
-          ))}
-        </div>
-      ) : error ? (
-        <p className="mb-4 text-red-600">{error}</p>
-      ) : (
-        <>
-          <div className="grid grid-cols-2 gap-2.5 sm:gap-5 lg:grid-cols-4">
-            {filtered.map((product) => (
-              <ProductCard key={product._id} product={product} />
-            ))}
-          </div>
-          {products.length === 0 ? (
-            <p className="text-gray-500">No phones found.</p>
-          ) : !filtered.length ? (
-            <p className="text-gray-500">No phones match your search or filters.</p>
-          ) : null}
-        </>
-      )}
+      {error && <p className="text-red-600 mb-4">{error}</p>}
+      <div className="grid grid-cols-2 gap-2.5 sm:gap-5 lg:grid-cols-4">
+        {filtered.map((product) => (
+          <ProductCard key={product._id} product={product} />
+        ))}
+      </div>
+      {!filtered.length && !error && <p className="text-gray-500">No phones found.</p>}
     </div>
   );
 };

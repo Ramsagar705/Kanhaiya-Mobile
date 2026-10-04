@@ -121,9 +121,19 @@ const Navbar = () => {
               </Link>
             )}
             {isAuthenticated && (
-              <button onClick={handleLogout} className="shrink-0 rounded-full border border-slate-200 bg-white px-2.5 py-2 text-xs font-bold text-slate-700 hover:border-premium-accent md:hidden">
-                Logout
-              </button>
+              <div className="flex shrink-0 items-center gap-1 md:hidden">
+                {user?.role === 'admin' && (
+                  <Link
+                    to="/admin"
+                    className="rounded-full bg-premium-900 px-2.5 py-2 text-xs font-bold text-white hover:bg-premium-800"
+                  >
+                    Admin
+                  </Link>
+                )}
+                <button onClick={handleLogout} className="rounded-full border border-slate-200 bg-white px-2.5 py-2 text-xs font-bold text-slate-700 hover:border-premium-accent">
+                  Logout
+                </button>
+              </div>
             )}
           </div>
         </div>
