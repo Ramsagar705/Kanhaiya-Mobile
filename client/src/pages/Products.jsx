@@ -3,6 +3,7 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import { Search, X } from 'lucide-react';
 import api from '../services/api';
 import ProductCard from '../components/common/ProductCard';
+import ProductCardSkeleton from '../components/common/ProductCardSkeleton';
 import BannerCarousel from '../components/layout/BannerCarousel';
 
 const Products = ({ dealsOnly = false }) => {
@@ -11,28 +12,44 @@ const Products = ({ dealsOnly = false }) => {
   const [products, setProducts] = useState([]);
   const [sort, setSort] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [retryCount, setRetryCount] = useState(0);
   const q = params.get('q') || '';
   const [searchQuery, setSearchQuery] = useState(q);
 
   const apiType = type === 'used' ? 'second_hand' : type === 'new' ? 'new' : '';
 
   useEffect(() => {
+    let isCurrentRequest = true;
     const query = new URLSearchParams();
     if (apiType) query.set('type', apiType);
     if (sort) query.set('sort', sort);
-    api
-      .get(`/products?${query.toString()}`)
-      .then((res) => setProducts(res.data.products || []))
-      .catch((error) => {
+
+    const loadProducts = async () => {
+      setLoading(true);
+      setError('');
+
+      try {
+        const res = await api.get(`/products?${query.toString()}`);
+        if (isCurrentRequest) setProducts(res.data.products || []);
+      } catch (requestError) {
         console.error('[Products page] Could not load products', {
-          requestedUrl: `${error.config?.baseURL || ''}${error.config?.url || ''}`,
-          status: error.response?.status,
-          backendResponse: error.response?.data,
-          message: error.message,
+          requestedUrl: `${requestError.config?.baseURL || ''}${requestError.config?.url || ''}`,
+          status: requestError.response?.status,
+          backendResponse: requestError.response?.data,
+          message: requestError.message,
         });
-        setError('Could not load products.');
-      });
-  }, [apiType, sort]);
+        if (isCurrentRequest) setError('Unable to load phones. Please try again.');
+      } finally {
+        if (isCurrentRequest) setLoading(false);
+      }
+    };
+
+    loadProducts();
+    return () => {
+      isCurrentRequest = false;
+    };
+  }, [apiType, sort, retryCount]);
 
   useEffect(() => {
     setSearchQuery(q);
@@ -109,13 +126,24 @@ const Products = ({ dealsOnly = false }) => {
           <option value="price_high">Price: high to low</option>
         </select>
       </div>
-      {error && <p className="text-red-600 mb-4">{error}</p>}
+      {error && (
+        <div className="flex flex-wrap items-center gap-3 text-sm text-red-600" role="alert">
+          <p>{error}</p>
+          <button
+            type="button"
+            onClick={() => setRetryCount((count) => count + 1)}
+            className="rounded-full border border-red-200 bg-white px-4 py-2 font-bold text-red-700 hover:bg-red-50"
+          >
+            Retry
+          </button>
+        </div>
+      )}
       <div className="grid grid-cols-2 gap-2.5 sm:gap-5 lg:grid-cols-4">
-        {filtered.map((product) => (
-          <ProductCard key={product._id} product={product} />
-        ))}
+        {loading
+          ? Array.from({ length: 4 }, (_, index) => <ProductCardSkeleton key={index} />)
+          : filtered.map((product) => <ProductCard key={product._id} product={product} />)}
       </div>
-      {!filtered.length && !error && <p className="text-gray-500">No phones found.</p>}
+      {!loading && !filtered.length && !error && <p className="text-gray-500">No phones found.</p>}
     </div>
   );
 };
