@@ -22,7 +22,9 @@ https://kanhaiyamobile.online
 - Delivery status tracking
 
 ## 🎥 Project Demo
-Add your demo video link here.
+
+[▶️ Watch Kanhaiya Mobile Demo](https://github.com/Ramsagar705/Kanhaiya-Mobile/blob/main/Technology%20Corporate%20-%20Trim.mp4)
+
 
 ## 👨‍💻 Developer
 Ramsagar Chandravanshi
