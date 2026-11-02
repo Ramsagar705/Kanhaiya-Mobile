@@ -120,6 +120,7 @@ exports.forgotPassword = async (req, res) => {
     await sendPasswordResetEmail(user.email, resetUrl);
     return res.json(genericResponse);
   } catch (error) {
+    console.error('[Auth] Password reset request failed');
     return res.status(500).json({ message: 'Unable to send password reset email' });
   }
 };
