@@ -8,7 +8,59 @@ import api from '../../services/api';
 const fallbackPhoneImage =
   'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?auto=format&fit=crop&w=800&q=80';
 
-const ProductCard = ({ product }) => {
+const cloudinaryTransformationPattern =
+  /^(?:f|q|w|h|c|g|ar|dpr|e|fl|t|r|b|bo|o|a|x|y|z|l|u|pg|fps|dn|cs|ac|af|br|vc|so|du|sp|if|ki|dl|fn|co)_[^,]+(?:,(?:f|q|w|h|c|g|ar|dpr|e|fl|t|r|b|bo|o|a|x|y|z|l|u|pg|fps|dn|cs|ac|af|br|vc|so|du|sp|if|ki|dl|fn|co)_[^,]+)*$/;
+
+const optimizeCloudinaryProductImage = (imageUrl) => {
+  if (typeof imageUrl !== 'string') return imageUrl;
+
+  let url;
+  try {
+    url = new URL(imageUrl);
+  } catch {
+    return imageUrl;
+  }
+
+  if (
+    url.hostname !== 'res.cloudinary.com' &&
+    !url.hostname.endsWith('.res.cloudinary.com')
+  ) {
+    return imageUrl;
+  }
+
+  const pathSegments = url.pathname.split('/');
+  const uploadIndex = pathSegments.indexOf('upload');
+  if (uploadIndex === -1) return imageUrl;
+
+  let transformationsEnd = uploadIndex + 1;
+  const existingTransformations = [];
+  while (
+    transformationsEnd < pathSegments.length &&
+    cloudinaryTransformationPattern.test(pathSegments[transformationsEnd])
+  ) {
+    existingTransformations.push(pathSegments[transformationsEnd]);
+    transformationsEnd += 1;
+  }
+
+  const requiredTransformations = ['f_auto', 'q_auto', 'w_450'];
+  const existingKeys = new Set(
+    existingTransformations.flatMap((transformation) =>
+      transformation.split(',').map((part) => part.split('_', 1)[0])
+    )
+  );
+  const missingTransformations = requiredTransformations.filter(
+    (transformation) => !existingKeys.has(transformation.split('_', 1)[0])
+  );
+
+  if (missingTransformations.length) {
+    pathSegments.splice(transformationsEnd, 0, missingTransformations.join(','));
+    url.pathname = pathSegments.join('/');
+  }
+
+  return url.toString();
+};
+
+const ProductCard = ({ product, index = Number.MAX_SAFE_INTEGER }) => {
   const { addToCart } = useCart();
   const { isAuthenticated } = useAuth();
   const [liked, setLiked] = useState(false);
@@ -29,7 +81,9 @@ const ProductCard = ({ product }) => {
     specifications.storage,
     ...additionalSpecifications,
   ].filter(Boolean).slice(0, 4).join(' · ') || product.model || 'Specifications unavailable';
-  const productImage = product.images?.[0] || product.image || fallbackPhoneImage;
+  const productImage = optimizeCloudinaryProductImage(
+    product.images?.[0] || product.image || fallbackPhoneImage
+  );
 
   useEffect(() => {
     if (!cartMessage) return;
@@ -78,6 +132,11 @@ const ProductCard = ({ product }) => {
         <img
           src={productImage}
           alt={product.title}
+          width="450"
+          height="450"
+          loading={index < 4 ? 'eager' : 'lazy'}
+          fetchPriority={index === 0 ? 'high' : undefined}
+          decoding="async"
           className="h-full w-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
         />
       </Link>

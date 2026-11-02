@@ -141,7 +141,9 @@ const Products = ({ dealsOnly = false }) => {
       <div className="grid grid-cols-2 gap-2.5 sm:gap-5 lg:grid-cols-4">
         {loading
           ? Array.from({ length: 4 }, (_, index) => <ProductCardSkeleton key={index} />)
-          : filtered.map((product) => <ProductCard key={product._id} product={product} />)}
+          : filtered.map((product, index) => (
+            <ProductCard key={product._id} product={product} index={index} />
+          ))}
       </div>
       {!loading && !filtered.length && !error && <p className="text-gray-500">No phones found.</p>}
     </div>
